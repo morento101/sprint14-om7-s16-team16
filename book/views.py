@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views import View
+from django.http import HttpResponseBadRequest
+from . import forms
 
 from django.shortcuts import get_object_or_404
 
@@ -63,3 +65,15 @@ class UserBookList(View):
     def get(self, request, user_id):
         books = Book.objects.filter(order__user=user_id)
         return render(request, 'book/user_book_list.html', context={'books': books})
+
+
+class CreateBookView(View):
+    def get(self, request):
+        form = forms.CreateBookForm(request.GET)
+        return render(request, 'book/create_book.html', context={'form': form})
+
+    def post(self, request):
+        form = forms.CreateBookForm(request.POST)
+        if form.is_valid():
+            return render(request, 'book/create_book.html', context={'form': form})
+        return HttpResponseBadRequest('Bad Request')
