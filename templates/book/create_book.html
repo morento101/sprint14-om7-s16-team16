@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Create Book{% endblock %}
+{% block section %}
+    <h1 class="jumbotron-heading">Create Book</h1>
+    <p class="lead text-muted">
+        Here you can create a new Book entity.
+    </p>
+{% endblock %}
 {% block content %}
     <form>
         {% csrf_token %}
