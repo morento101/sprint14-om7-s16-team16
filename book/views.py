@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
@@ -51,13 +51,32 @@ class UserBookList(View):
         return render(request, 'book/user_book_list.html', context={'books': books})
 
 
-class CreateBookView(View):
-    def get(self, request):
-        form = forms.CreateBookForm(request.GET)
-        return render(request, 'book/create_book.html', context={'form': form})
+class BookFormView(View):
+    def get(self, request, book_id=None):
+        if book_id:
+            book = get_object_or_404(Book, id=book_id)
+            form = forms.BookForm(instance=book)
+        else:
+            form = forms.BookForm()
 
-    def post(self, request):
-        form = forms.CreateBookForm(request.POST)
+        return render(request, 'book/book_form.html', context={'form': form})
+
+    def post(self, request, book_id=None):
+        if book_id:
+            book = get_object_or_404(Book, id=book_id)
+            form = forms.BookForm(request.POST, instance=book)
+        else:
+            form = forms.BookForm(request.POST)
+
         if form.is_valid():
-            return render(request, 'book/create_book.html', context={'form': form})
+            form.save()
+            return redirect('book_list')
+
         return HttpResponseBadRequest('Bad Request')
+
+
+class DeleteBookView(View):
+    def get(self, request, book_id):
+        book = get_object_or_404(Book, id=book_id)
+        book.delete()
+        return redirect('book_list')
