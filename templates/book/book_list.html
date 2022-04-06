@@ -1,30 +1,49 @@
 {% extends 'base.html' %}
-{% block content %}
-    <section class="jumbotron text-center p-5">
-        <div class="container">
-            <h1 class="jumbotron-heading">Books</h1>
-            <p class="lead text-muted">
-                Here you can see list of all books that are available in our Library.
-            </p>
-            <form method="get">
-                <a class="btn btn-primary" href="book_list_asc">SortByName(ASC)</a>
-                <a class="btn btn-primary" href="book_list_desc">SortByName(Desc)</a>
-                <a class="btn btn-primary" href="book_list_count">SortByBookCount</a>
-            </form>
-            <form action="{% url 'book_list' %}">
-                <div class="form-group mt-3">
-                    <input type="text" class="form-control" name="book_name" id="book_name" aria-describedby="bookName"
-                           placeholder="Filter by Book Name">
-                </div>
-                <div class="form-group mt-3">
-                    <input type="text" class="form-control" name="author_surname" id="author_surname"
-                           aria-describedby="authorSurname"
-                           placeholder="Filter by Author Surname">
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Submit</button>
-            </form>
+{% block section %}
+    <h1 class="jumbotron-heading">Books</h1>
+    <p class="lead text-muted">
+        Here you can see list of all books that are available in our Library.
+    </p>
+    <form action="{% url 'book_list' %}">
+        <div class="d-flex justify-content-center align-content-center m-2 gap-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sorting" id="sort_by_name_asc"
+                       value="name" checked>
+                <label class="form-check-label" for="sort_by_name_asc">
+                    Sort By Name(Asc)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sorting" id="sort_by_name_desc"
+                       value="-name">
+                <label class="form-check-label" for="sort_by_name_desc">
+                    Sort By Name(Desc)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sorting" id="sort_by_count" value="count">
+                <label class="form-check-label" for="sort_by_count">
+                    Sort By Book Count
+                </label>
+            </div>
         </div>
-    </section>
+        {#        <a class="btn btn-primary" href="book_list_asc">Sort By Name(ASC)</a>#}
+        {#        <a class="btn btn-primary" href="book_list_desc">Sort By Name(Desc)</a>#}
+        {#        <a class="btn btn-primary" href="book_list_count">Sort By Book Count</a>#}
+        <div class="form-group mt-3">
+            <input type="text" class="form-control" name="book_name" id="book_name" aria-describedby="bookName"
+                   placeholder="Filter by Book Name">
+        </div>
+        <div class="form-group mt-3">
+            <input type="text" class="form-control" name="author_surname" id="author_surname"
+                   aria-describedby="authorSurname"
+                   placeholder="Filter by Author Surname">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+{% endblock %}
+
+{% block content %}
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -46,6 +65,7 @@
                                            class="btn btn-sm btn-outline-secondary">
                                             View
                                         </a>
+                                        <a href="" class="btn btn-sm btn-outline-secondary">Edit</a>
                                     </div>
                                 </div>
                             </div>

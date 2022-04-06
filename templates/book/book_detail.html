@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
+{% block section %}
+    <h1 class="jumbotron-heading">{{ book.name }}</h1>
+    <p class="lead text-muted">
+        {% for author in authors %}
+            {{ author.name }} {{ author.surname }}
+        {% endfor %}
+    </p>
+{% endblock %}
 {% block content %}
-    <section class="jumbotron text-center p-5">
-        <div class="container">
-            <h1 class="jumbotron-heading">{{ book.name }}</h1>
-            <p class="lead text-muted">
-                {% for author in authors %}
-                    {{ author.name }} {{ author.surname }}
-                {% endfor %}
-            </p>
-        </div>
-    </section>
     <div class="album py-5 bg-light">
         <div class="container d-flex align-content-center flex-wrap justify-content-center">
             <div class="card mb-4 box-shadow">
