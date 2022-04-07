@@ -28,7 +28,14 @@
                             <p class="card-text">Plated_end_at: {{ order.plated_end_at }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                    <a href="{% url 'update_order' order_id=order.id %}"
+                                       class="btn btn-sm btn-outline-secondary">
+                                        Edit
+                                    </a>
+                                    <a href="{% url 'delete_order' order_id=order.id %}"
+                                       class="btn btn-sm btn-outline-secondary">
+                                        Delete
+                                    </a>
                                 </div>
                             </div>
                         </div>
