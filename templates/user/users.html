@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table boarder = "1" cellpadding = "5" sellspacing = "5">
+    <td>ID</td>
+    <td>First Name</td>
+    <td>Middle Name</td>
+    <td>Last Name</td>
+    <td>Mail</td>
+    <td>Created At</td>
+    <td>Role</td>
+    {% for user in users %}
+        <tr>
+            <td><a href="{% url 'user_by_id' id=user.id %}">{{user.id}}</a></td>
+            <td>{{user.first_name|default:"-"}}</td>
+            <td>{{user.middle_name|default:"-"}}</td>
+            <td>{{user.last_name|default:"-"}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.created_at}}</td>
+            <td>{{user.get_role_name}}</td>
+            <td><a href="{% url 'update_user' id=user.id %}">Update</a></td>
+            <td><a href="{% url 'delete_user' id=user.id %}">Delete</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

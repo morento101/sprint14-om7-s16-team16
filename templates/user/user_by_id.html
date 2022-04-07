@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} User by ID {% endblock %}
+
+{% block header %} User by ID {% endblock %}
+
+{% block content %}
+<h4>ID: {{user.id}} Full Name: {{user.first_name|default:""}}
+    {{user.middle_name|default:""}}{{user.last_name|default:""}}
+    Email: {{user.email}}</h4>
+{% if orders_by_user %}
+    <table boarder = "1" cellpadding = "5" sellspacing = "5">
+        <td>Book</td>
+        <td>Created at</td>
+        <td>End at</td>
+        <td>Plated end at</td>
+        {% for order in orders_by_user %}
+            <tr>
+                <td>{{order.book.name|default:"-"}}</td>
+                <td>{{order.created_at}}</td>
+                <td>{{order.end_at|default:"not yet"}}</td>
+                <td>{{order.plated_end_at}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No orders</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %} Update User {% endblock %}
+
+{% block header %} Update User {% endblock %}
+
+{% block create_user %}{% endblock %}
+
+{% block content %}
+<h4>ID: {{user.id}}</h4>
+<h4>Full Name: {{user.first_name|default:""}}
+    {{user.middle_name|default:""}} {{user.last_name|default:""}}</h4>
+<h4>Email: {{user.email}}</h4>
+<form class="form" action="{% url 'update_user' id=user.id%}" method = 'POST'>{% csrf_token %}
+    <fieldset>
+        <legend>Login & Password</legend>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value={{user.email}} disabled><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
+        <input type="radio" id="visitor" name="role" value=0 checked>
+        <label for="visitor">Visitor</label><br>
+        <input type="radio" id="admin" name="role" value=0>
+        <label for="admin">Admin</label><br>
+    </fieldset>
+    <fieldset>
+        <legend>Personalia</legend>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" value={{user.first_name}}><br>
+        <label for="mname">Middle name:</label><br>
+        <input type="text" id="mname" name="mname" value={{user.middle_name}}><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" value={{user.last_name}}><br>
+    </fieldset>
+        <br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+</form>
+{% endblock %}
