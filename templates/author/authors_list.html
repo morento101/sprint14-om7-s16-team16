@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h4>List of Authors
+    <a class="btn btn-default" href="{% url 'author_create' %}" >
+    <span class="glyphicon glyphicon-plus"></span>
+    </a>
+</h4>
+{% for author in authors_list %}
+    <tr>
+        <td>
+            <a class="btn btn-default" href="{% url 'author_update' author.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default" href="{% url 'author_delete' author.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+        </td>
+        <td>{{author.name}}</td>
+        <td>{{author.surname}}</td>
+        <td>{{author.patronymic}}</td>
+    </tr>
+    <p></p>
+{% endfor %}
+{% endblock  %}content
