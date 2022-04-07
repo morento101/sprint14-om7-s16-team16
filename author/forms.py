@@ -7,4 +7,4 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Author
-        fields = ('name', 'surname', 'patronymic')
+        fields = ('__all__')

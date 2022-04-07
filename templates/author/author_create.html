@@ -1,10 +1,22 @@
-{% extends 'base.html' %}
 
+
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Create Form{% endblock %}
+{% block section %}
+    <h1 class="jumbotron-heading">Create new author</h1>
+    <p class="lead text-muted">
+        Here you can create or update a Author entity.
+    </p>
+{% endblock %}
 
 {% block content %}
-    <h1>Create new author</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-{% endblock content %}
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success" value="CREATE">
+        </form>
+    </div>
+{% endblock %}
