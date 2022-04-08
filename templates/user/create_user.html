@@ -1,35 +1,20 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Create User{% endblock %}
 
-{% block title %} Create User {% endblock %}
-
-{% block header %} Create User {% endblock %}
-
-{% block create_user %}{% endblock %}
+{% block section %}
+    <h1 class="jumbotron-heading">Create User</h1>
+    <p class="lead text-muted">
+        Here you can create a User entity.
+    </p>
+{% endblock %}
 
 {% block content %}
-<form class="form" action="{% url 'create_user' %}" method = 'POST'>{% csrf_token %}
-    <fieldset>
-        <legend>Login & Password</legend>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
-        <input type="radio" id="visitor" name="role" value="visitor" checked>
-        <label for="visitor">Visitor</label><br>
-        <input type="radio" id="admin" name="role" value="admin">
-        <label for="admin">Admin</label><br>
-    </fieldset>
-    <fieldset>
-        <legend>Personalia</legend>
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="mname">Middle name:</label><br>
-        <input type="text" id="mname" name="mname"><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname"><br>
-    </fieldset>
-        <br>
-        <input type="submit" value="Submit">
-        <input type="reset" value="Reset">
-</form>
+    <div class="container">
+        <form class="form" action="{% url 'create_user' %}" method='POST'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success mt-2" value="Submit">
+        </form>
+    </div>
 {% endblock %}

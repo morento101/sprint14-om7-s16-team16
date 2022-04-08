@@ -21,6 +21,6 @@ urlpatterns = [
     path('books/', include('book.urls')),
     path('orders/', include('order.urls')),
     path('authors/', include('author.urls')),
-    path('user/', include('authentication.urls')),
+    path('users/', include('authentication.urls')),
 
 ]
