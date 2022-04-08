@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Order Form{% endblock %}
+{% block section %}
+    <h1 class="jumbotron-heading">Order Form</h1>
+    <p class="lead text-muted">
+        Here you can create or update a Order entity.
+    </p>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success" value="Submit">
+        </form>
+    </div>
+{% endblock %}
