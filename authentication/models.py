@@ -10,6 +10,8 @@ ROLE_CHOICES = (
 )
 
 
+
+
 class CustomUser(AbstractBaseUser):
     """
         This class represents a basic user. \n

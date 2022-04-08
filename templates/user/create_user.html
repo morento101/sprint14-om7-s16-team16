@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Create User{% endblock %}
+
+{% block section %}
+    <h1 class="jumbotron-heading">Create User</h1>
+    <p class="lead text-muted">
+        Here you can create a User entity.
+    </p>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="form" action="{% url 'create_user' %}" method='POST'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" class="btn btn-success mt-2" value="Submit">
+        </form>
+    </div>
+{% endblock %}

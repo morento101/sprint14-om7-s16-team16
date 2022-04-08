@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block section %}
+    <h1 class="jumbotron-heading">Users</h1>
+    <p class="lead text-muted">
+        Here you can see list of all Users
+    </p>
+    <a class="btn btn-success" href="{% url 'create_user' %}">Create New User</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Middle Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Role</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <th scope="row"><a href="{% url 'user_by_id' user_id=user.id %}">{{ user.id }}</a></th>
+                    <td>{{ user.first_name|default:"-" }}</td>
+                    <td>{{ user.middle_name|default:"-" }}</td>
+                    <td>{{ user.last_name|default:"-" }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.created_at }}</td>
+                    <td>{{ user.get_role_name }}</td>
+                    <td><a href="{% url 'update_user' user_id=user.id %}">Update</a></td>
+                    <td><a href="{% url 'delete_user' user_id=user.id %}">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
